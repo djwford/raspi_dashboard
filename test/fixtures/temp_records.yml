@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  readings: MyText
+  highest: 1
+  lowest: 1
+  average: 1
+  record_date: 2015-06-18 16:50:36
+
+two:
+  readings: MyText
+  highest: 1
+  lowest: 1
+  average: 1
+  record_date: 2015-06-18 16:50:36

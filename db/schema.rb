@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606175448) do
+ActiveRecord::Schema.define(version: 20150618225036) do
 
   create_table "migrations", force: true do |t|
     t.string   "add_readings"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20150606175448) do
   create_table "readings", force: true do |t|
     t.datetime "read_time"
     t.decimal  "temp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "temp_records", force: true do |t|
+    t.text     "readings"
+    t.integer  "highest"
+    t.integer  "lowest"
+    t.integer  "average"
+    t.datetime "record_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

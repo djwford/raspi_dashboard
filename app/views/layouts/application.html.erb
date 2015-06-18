@@ -20,7 +20,8 @@
       var pusher = new Pusher('6c776bb9a448a9be701d');
       var channel = pusher.subscribe('temperature');
       channel.bind('post_reading', function(data) {
-        $("#reading").html(data.message)
+        var previous_reading = $("#reading").html();
+        $("#reading").html(previous_reading + ",<br>" + data.message);
         console.log(data.message);
       });
     </script>

@@ -1,0 +1,2 @@
+module TempRecordsHelper
+end

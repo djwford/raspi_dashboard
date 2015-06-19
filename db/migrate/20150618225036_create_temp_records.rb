@@ -5,7 +5,7 @@ class CreateTempRecords < ActiveRecord::Migration
       t.integer :highest
       t.integer :lowest
       t.integer :average
-      t.datetime :record_date
+      t.string :record_date
       t.timestamps
     end
   end

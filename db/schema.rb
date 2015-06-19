@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150618225036) do
     t.integer  "highest"
     t.integer  "lowest"
     t.integer  "average"
-    t.datetime "record_date"
+    t.string   "record_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

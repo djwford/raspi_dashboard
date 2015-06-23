@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require highcharts.js
+//= require insta_feed.js
 //= require_tree .
 $(function() {
   $(document).foundation();

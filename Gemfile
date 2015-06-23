@@ -12,7 +12,7 @@ gem 'devise'
 gem 'foundation-rails'
 gem 'simple_form'
 gem 'figaro'
-
+gem 'httparty'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

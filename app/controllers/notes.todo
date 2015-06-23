@@ -1,6 +1,8 @@
 Interior Temperature graphs:
-  ☐ trailing 7 days
-  ☐ trailing month
+  ☐ current
+    ☐  current graph
+    ☐ current internal temp reading
+    ☐ trailing month
   ☐ all time
 calendar:
   ☐ use google's plugin to share and link calendars
@@ -9,6 +11,8 @@ links:
   ☐ google maps
   ☐ wikipedia
   ☐ instagram
+    ☐ slider: http://kenwheeler.github.io/slick/
+    ☐ instafeed: http://instafeedjs.com/#access_token=1972973489.467ede5.f85a31b84fff4317bcf0b9e986097e00
   ☐ trello (for recipes)
   ☐ recipe api
   ☐ youtube
@@ -17,6 +21,10 @@ links:
 utilities:
  ☐ questar & rocky mountain power usage
  ☐ 
+Forecast:
+  ☐ forecast.io
 
-Internet Speed test:
-  ☐ api
+
+
+
+  Client.where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)

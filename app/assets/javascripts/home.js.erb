@@ -1,0 +1,103 @@
+
+// Readings graphs
+// _______________
+  
+// daily reading
+
+
+$(function () {
+  $('#temperature_today').highcharts({
+      chart: {
+          type: 'areaspline',
+          animation: Highcharts.svg,
+          height: 400,
+          width: 700
+      },
+      title: {
+          text: 'Temperature Today'
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+        min: 30
+      },
+
+      series: [{
+        name: "Temperature",
+        pointInterval: 100,
+        pointStart: <%= (Time.now.beginning_of_day.to_i) * 1000 %>,
+        data: <%= JSON::parse(TempRecord.last.readings) %>
+      }]
+  });
+});
+
+function update_daily_temp(temp){
+  var chart = $('#temperature_today').highcharts();
+  chart.series[0].addPoint(temp, true, true);
+  $("#temp_display").html(temp);
+}
+
+// monthly reading
+
+$(function () {
+  $('#temperature_month').highcharts({
+      chart: {
+          type: 'line',
+          animation: Highcharts.svg,
+          height: 400,
+          width: 700
+      },
+      title: {
+          text: 'Monthly Temperature'
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+      },
+
+      series: [
+      {
+        name: "Highs",
+        pointInterval: (86400 * 1000),
+        pointStart: <%= (Time.now.beginning_of_month.to_i) * 1000 %>,
+        data: <%= TempRecord.monthly_extremes[0] %>
+      },
+      {
+        name: "Lows",
+        pointInterval: (86400 * 1000),
+        pointStart: <%= (Time.now.beginning_of_month.to_i) * 1000 %>,
+        data: <%= TempRecord.monthly_extremes[1] %>        
+
+    }]
+  });
+});
+
+// all_time readings
+$(function () {
+  $('#temperature_average').highcharts({
+      chart: {
+          type: 'line',
+          animation: Highcharts.svg,
+          height: 400,
+          width: 700
+      },
+      title: {
+          text: 'Average Daily Temperature'
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+      },
+
+      series: [
+      {
+        name: "Average Temps.",
+        pointInterval: (86400 * 1000),
+        pointStart: <%= TempRecord.first.created_at.to_i * 1000 %>,
+        data: <%= TempRecord.all_time %>
+      }]
+  });
+});

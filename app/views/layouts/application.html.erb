@@ -20,7 +20,8 @@
       var pusher = new Pusher('6c776bb9a448a9be701d');
       var channel = pusher.subscribe('temperature');
       channel.bind('post_reading', function(data) {
-        $("#reading").append("<p>" + data.message + "</p>");
+        // update the daily temperature
+        update_daily_temp(parseInt(data.message))
         console.log(data.message);
       });
     </script>
@@ -31,9 +32,11 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-      <iframe src="https://embed.spotify.com/?uri=spotify:user:dw.deviant:playlist:6weUS6Ng9eA67U0e9lMP7c&theme=white" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>       
+       <%= render 'layouts/spotify' %>
+       <%= render 'layouts/temp_readings' %>
+       <%= render 'layouts/forecast' %>
+       <%= render 'layouts/insta_feed' %>       
+       <%= yield %>      
     </main>
   </body>
 </html>

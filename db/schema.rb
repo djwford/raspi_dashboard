@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618225036) do
+ActiveRecord::Schema.define(version: 20150623042836) do
+
+  create_table "hourly_forecasts", force: true do |t|
+    t.text     "precip_probability"
+    t.text     "temperature"
+    t.text     "humidity"
+    t.text     "wind_speed"
+    t.text     "cloud_cover"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "migrations", force: true do |t|
     t.string   "add_readings"

@@ -101,3 +101,82 @@ $(function () {
       }]
   });
 });
+
+// hourly_forecast
+$(function () {
+  $('#hourly_forecast_temperature').highcharts({
+      chart: {
+          type: 'line',
+          animation: Highcharts.svg,
+          height: 400,
+          width: 700
+      },
+      title: {
+          text: 'Hourly Forecast'
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+      },
+
+      series: [
+      {
+        name: "Temperature",
+        pointInterval: (3600 * 1000),
+        pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
+        data: <%= HourlyForecast.last.temperature %>
+      },
+ 
+      {
+        name: "Wind Speed",
+        pointInterval: (3600 * 1000),
+        pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
+        data: <%= HourlyForecast.last.wind_speed %>
+      }
+
+
+      ]
+  });
+});
+// hourly_forecast_other
+$(function () {
+  $('#hourly_forecast_other').highcharts({
+      chart: {
+          type: 'line',
+          animation: Highcharts.svg,
+          height: 400,
+          width: 700
+      },
+      title: {
+          text: 'Hourly Forecast Other Data'
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+      },
+
+      series: [
+      {
+        name: "Precipitation Probability",
+        pointInterval: (3600 * 1000),
+        pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
+        data: <%= HourlyForecast.last.precip_probability %>
+      },
+      {
+        name: "Humidity",
+        pointInterval: (3600 * 1000),
+        pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
+        data: <%= HourlyForecast.last.humidity %>
+      },
+      {
+        name: "Cloud Cover",
+        pointInterval: (3600 * 1000),
+        pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
+        data: <%= HourlyForecast.last.cloud_cover %>
+      }
+      ]
+  });
+});
+

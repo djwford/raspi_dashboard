@@ -1,0 +1,18 @@
+<%= simple_form_for @utility_bill do |f| %>
+  <%= f.label :category, "Category" %>
+  <%= f.text_field :category %>
+  
+  <%= f.label :month, "Month" %>
+  <%= f.text_field :month %>
+
+  <%= f.label :total_used, "Units Used" %>
+  <%= f.text_field :total_used %>
+
+  <%= f.label :unit_price, "Price per Unit" %>
+  <%= f.text_field :unit_price %>
+
+  <%= f.label :days_in_cycle, "Days in Billing Period" %>
+  <%= f.text_field :days_in_cycle %>
+
+  <%= f.submit %>
+<% end %>

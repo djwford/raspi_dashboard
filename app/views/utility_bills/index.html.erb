@@ -1,0 +1,4 @@
+<% @utility_bill.all.each do |bill| %>
+  <% bill_string = bill.month + " -- " + bill.category %>
+  <%= link_to bill_string,  edit_utility_bill_path(bill) %>
+<% end %>

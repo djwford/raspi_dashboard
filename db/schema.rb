@@ -66,10 +66,11 @@ ActiveRecord::Schema.define(version: 20150624011430) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "utility_bills", force: true do |t|
-    t.decimal  "total_used"
-    t.decimal  "unit_price"
+    t.float    "total_used"
+    t.integer  "month"
+    t.float    "unit_price"
     t.integer  "days_in_cycle"
-    t.decimal  "daily_price"
+    t.float    "daily_price"
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"

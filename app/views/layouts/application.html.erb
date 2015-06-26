@@ -31,12 +31,7 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
-       <%= render 'layouts/spotify' %>
-       <%= render 'layouts/temp_readings' %>
-       <%= render 'layouts/forecast' %>
-       <%= render 'layouts/insta_feed' %> 
-       <%= render 'layouts/hourly_forecast' %>      
+    <main role="main">    
        <%= yield %>      
     </main>
   </body>

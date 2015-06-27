@@ -17,6 +17,7 @@ links:
   ☐ recipe api
   ☐ youtube
   ✔ spotify -- embed playlists @done (15-06-19 08:38)
+    ☐ embed multiple playlists in a carousel
 
 utilities:
  ☐ questar & rocky mountain power usage
@@ -25,6 +26,14 @@ Forecast:
   ☐ forecast.io
 
 
+background:
+  ☐ grab the top wallpaper from r/wallpaper & earthPorn, cityPorn, Skylines --> maybe a new theme every day
+  ☐ 
+  ☐ save locally
+  ☐ there should be a button to approve or reject
+  ☐ alter the color scheme based on the most prominent colors in the image
+  ☐ different layouts for different images
+  ☐ ability to switch between images/layouts
 
 
   Client.where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)

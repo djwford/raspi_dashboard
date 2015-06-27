@@ -16,7 +16,7 @@ gem 'httparty'
 gem 'whenever', :require => false
 gem 'better_errors'
 gem 'binding_of_caller'
-
+gem "font-awesome-rails"
 
 group :development do
   gem 'foreman'

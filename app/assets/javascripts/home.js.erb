@@ -1,3 +1,33 @@
+$(window).load(function() {    
+
+  // resize the background window
+  var theWindow        = $(window),
+      $bg              = $("#bg"),
+      aspectRatio      = $bg.width() / $bg.height();
+                    
+  function resizeBg() {
+    if ( (theWindow.width() / theWindow.height()) < aspectRatio ) {
+      $bg
+        .removeClass()
+        .addClass('bgheight');
+    } else {
+      $bg
+        .removeClass()
+        .addClass('bgwidth');
+    }     
+  }                     
+  theWindow.resize(resizeBg).trigger("resize");
+
+  // slideshow / carousel graphs
+  $(function(){
+    $("#slides").slidesjs({
+      width: 940,
+      height: 528
+    });
+  });  
+});
+
+
 
 // Readings graphs
 // _______________

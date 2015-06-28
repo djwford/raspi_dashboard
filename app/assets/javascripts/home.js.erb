@@ -18,15 +18,18 @@ $(window).load(function() {
   }                     
   theWindow.resize(resizeBg).trigger("resize");
 
-  // slideshow / carousel graphs
-  $(function(){
-    $("#slides").slidesjs({
-      width: 940,
-      height: 528
-    });
-  });  
+  // slideshow / carousel graphs  
 });
 
+// $(document).ready(function(){
+//   $(function(){
+//     $("#slides").slidesjs({
+//       width: 940,
+//       height: 528
+//     });
+//   });
+// });
+  
 
 
 // Readings graphs
@@ -38,26 +41,66 @@ $(window).load(function() {
 $(function () {
   $('#temperature_today').highcharts({
       chart: {
-          type: 'areaspline',
+          type: 'line',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 300,
+          width: 600,
+          backgroundColor: 'rgba(175,172,172,0.48)',
+          plotBackgroundColor: null,
+        style:{
+          fontSize: '12px',
+        }
+      },
+      legend:{
+        enabled: false
       },
       title: {
-          text: 'Temperature Today'
+          text: 'Temperature Today',
+          style: {
+            color: "#E8FCB9"
+          }
       },
       xAxis: {
-          type: 'datetime'
+          type: 'datetime',
+          gridLineWidth: 0,
+          labels:{
+            style:{
+              color: '#E8FCB9',
+              fontSize: '15px',
+            },
+            dateTimeLabelFormats: {
+              hour: '%H:%M'
+            }
+        },          
       },
       yAxis: {
-        min: 30
+        floor: 55,
+        gridLineWidth: 0,
+        labels:{
+          style:{
+            color: '#E8FCB9',
+            fontSize: '15px',
+          }
+        },
+        title:null        
       },
-
+      plotOptions:{
+        series:{
+          marker:{
+            enabled: false
+          },
+          // dataLabels:{
+          //   enabled: true
+          // }
+        }
+      },
       series: [{
         name: "Temperature",
-        pointInterval: 100,
+        pointInterval: 120000,
         pointStart: <%= (Time.now.beginning_of_day.to_i) * 1000 %>,
-        data: <%= JSON::parse(TempRecord.last.readings) %>
+        data: <%= JSON::parse(TempRecord.last.readings) %>,
+        lineWidth: 3,
+        color: "#E8FCB9"
       }]
   });
 });
@@ -79,12 +122,29 @@ $(function () {
           width: 700
       },
       title: {
-          text: 'Monthly Temperature'
+          text: 'Monthly Temperature',
+          style: {
+            color: "#E8FCB9"
+          }
       },
       xAxis: {
-          type: 'datetime'
-      },
+          type: 'datetime',
+          gridLineWidth: 0,
+          labels:{
+            style:{
+              color: '#E8FCB9',
+              fontSize: '15px',
+            },      
+          },                         
+        },
       yAxis: {
+        gridLineWidth: 0,
+        labels:{
+          style:{
+            color: '#E8FCB9',
+            fontSize: '15px',
+          }
+        },        
       },
 
       series: [
@@ -114,12 +174,20 @@ $(function () {
           width: 700
       },
       title: {
-          text: 'Average Daily Temperature'
+          text: 'Average Daily Temperature',
+          style: {
+            color: "#E8FCB9"
+          }          
+      },
+      legend:{
+        enabled: false
       },
       xAxis: {
           type: 'datetime'
       },
       yAxis: {
+        title:null,
+        gridLineWidth:0
       },
 
       series: [
@@ -142,14 +210,27 @@ $(function () {
           width: 700
       },
       title: {
-          text: 'Hourly Forecast'
+          text: 'Hourly Forecast',
+          style: {
+            color: "#E8FCB9"
+          }          
       },
       xAxis: {
           type: 'datetime'
       },
       yAxis: {
+        title:null
       },
-
+      plotOptions:{
+        series:{
+          marker:{
+            enabled: true
+          },
+          dataLabels:{
+            enabled: true
+          }
+        }
+      },
       series: [
       {
         name: "Temperature",
@@ -163,12 +244,10 @@ $(function () {
         pointInterval: (3600 * 1000),
         pointStart: <%= HourlyForecast.last.created_at.to_i * 1000 %>,
         data: <%= HourlyForecast.last.wind_speed %>
-      }
-
-
-      ]
+      }]
   });
 });
+
 // hourly_forecast_other
 $(function () {
   $('#hourly_forecast_other').highcharts({
@@ -179,14 +258,28 @@ $(function () {
           width: 700
       },
       title: {
-          text: 'Hourly Forecast Other Data'
+          text: 'Hourly Forecast Other Data',
+          style: {
+            color: "#E8FCB9"
+          }          
       },
       xAxis: {
           type: 'datetime'
       },
       yAxis: {
+        floor: 0,
+        title:null
       },
-
+      plotOptions:{
+        series:{
+          marker:{
+            enabled: false
+          },
+          dataLabels:{
+            enabled: false
+          }
+        }
+      },
       series: [
       {
         name: "Precipitation Probability",
@@ -220,14 +313,24 @@ $(function () {
           width: 700
       },
       xAxis: {
-          type: 'datetime'
-      },      
+          // type: 'datetime',
+          gridLineWidth: 0,
+          dateTimeLabelFormats: {
+            day: '%b'
+          }          
+      },  
+      yAxis:{
+        title:null
+      }, 
       title: {
-          text: 'Gas Usage'
+          text: 'Gas Usage',
+          style: {
+            color: "#E8FCB9"
+          }          
       },
       series: [
       {
-        name: "Average Gas Cost per Day",
+        name: "Avg. Daily Cost",
         pointInterval: (2419200000),
         <% bill_year = (UtilityBill.first.created_at).year %>
         pointStart: <%= (Time.local(bill_year,UtilityBill.first.month,1).to_i) * 1000 %>,        
@@ -292,3 +395,4 @@ $(function () {
       }]
   });
 });
+

@@ -1,8 +1,16 @@
-<div id="slides">
-  <%= render 'layouts/spotify' %>
-  <%= render 'layouts/temp_readings' %>
+<div id="forecast_container">
   <%= render 'layouts/forecast' %>
-  <%= render 'layouts/insta_feed' %> 
+</div>
+
+<div id="spotify_container">
+  <%= render 'layouts/spotify' %>
+</div>
+
+<div id="temp_graphs">
+  <%= render 'layouts/temp_readings' %>
   <%= render 'layouts/hourly_forecast' %>  
+</div>
+
+<div id="utilities_graphs">
   <%= render 'layouts/utility_bill_graph' %>
-</slides>
+</div>

@@ -12,16 +12,17 @@ class UtilityBill < ActiveRecord::Base
   end
 
   def self.prices
-    electric_bills = UtilityBill.where("category" => "electric").order(month: :asc)
     electric_output = []
+    gas_output = []
+    # multiplying by 10 to be comparable to gas
+    electric_bills = UtilityBill.where("category" => "electric").order(month: :asc)
     electric_bills.each do |bill|
-      electric_output.push bill.unit_price
+      electric_output.push [bill.month, (bill.unit_price)*100]
     end
     gas_bills = UtilityBill.where("category" => "gas").order(month: :asc)
-    gas_output = []
     gas_bills.each do |bill|
-      gas_output.push bill.unit_price
+      gas_output.push [bill.month, bill.unit_price]
     end
-    return [electric_output, gas_output]
+    return [gas_output, electric_output]
   end
 end

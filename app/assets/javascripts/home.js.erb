@@ -21,14 +21,39 @@ $(window).load(function() {
   // slideshow / carousel graphs  
 });
 
-// $(document).ready(function(){
-//   $(function(){
-//     $("#slides").slidesjs({
-//       width: 940,
-//       height: 528
-//     });
-//   });
-// });
+$(document).ready(function(){
+  // Create two variable with the names of the months and days in an array
+  var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+  var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+
+  // Create a newDate() object
+  var newDate = new Date();
+  // Extract the current date from Date object
+  newDate.setDate(newDate.getDate());
+  // Output the day, date, month and year   
+  $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+  setInterval( function() {
+    // Create a newDate() object and extract the seconds of the current time on the visitor's
+    var seconds = new Date().getSeconds();
+    // Add a leading zero to seconds value
+    $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+    },1000);
+    
+  setInterval( function() {
+    // Create a newDate() object and extract the minutes of the current time on the visitor's
+    var minutes = new Date().getMinutes();
+    // Add a leading zero to the minutes value
+    $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+      },1000);
+    
+  setInterval( function() {
+    // Create a newDate() object and extract the hours of the current time on the visitor's
+    var hours = new Date().getHours();
+    // Add a leading zero to the hours value
+    $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+      }, 1000); 
+});
   
 
 
@@ -43,8 +68,8 @@ $(function () {
       chart: {
           type: 'line',
           animation: Highcharts.svg,
-          height: 300,
-          width: 600,
+          height: 280,
+          width: 305,
           backgroundColor: 'rgba(175,172,172,0.48)',
           plotBackgroundColor: null,
         style:{
@@ -118,8 +143,8 @@ $(function () {
       chart: {
           type: 'line',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 280,
+          width: 305
       },
       title: {
           text: 'Monthly Temperature',
@@ -170,8 +195,8 @@ $(function () {
       chart: {
           type: 'line',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 280,
+          width: 305
       },
       title: {
           text: 'Average Daily Temperature',
@@ -206,8 +231,8 @@ $(function () {
       chart: {
           type: 'line',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 280,
+          width: 305
       },
       title: {
           text: 'Hourly Forecast',
@@ -254,8 +279,8 @@ $(function () {
       chart: {
           type: 'line',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 280,
+          width: 305
       },
       title: {
           text: 'Hourly Forecast Other Data',
@@ -303,96 +328,62 @@ $(function () {
   });
 });
 
-// gas bill graph
-$(function () {
-  $('#gas_usage').highcharts({
-      chart: {
-          type: 'column',
-          animation: Highcharts.svg,
-          height: 400,
-          width: 700
-      },
-      xAxis: {
-          // type: 'datetime',
-          gridLineWidth: 0,
-          dateTimeLabelFormats: {
-            day: '%b'
-          }          
-      },  
-      yAxis:{
-        title:null
-      }, 
-      title: {
-          text: 'Gas Usage',
-          style: {
-            color: "#E8FCB9"
-          }          
-      },
-      series: [
-      {
-        name: "Avg. Daily Cost",
-        pointInterval: (2419200000),
-        <% bill_year = (UtilityBill.first.created_at).year %>
-        pointStart: <%= (Time.local(bill_year,UtilityBill.first.month,1).to_i) * 1000 %>,        
-        data: <%= UtilityBill.gas_usage %>
-      }]
-  });
-});
-// electric_usage
-$(function () {
-  $('#electric_usage').highcharts({
-      chart: {
-          type: 'column',
-          animation: Highcharts.svg,
-          height: 400,
-          width: 700
-      },
-      xAxis: {
-          type: 'datetime'
-      },      
-      title: {
-          text: 'Gas Usage'
-      },
-      series: [
-      {
-        name: "Average Gas Cost per Day",
-        pointInterval: (2419200000),
-        <% bill_year = (UtilityBill.first.created_at).year %>
-        pointStart: <%= (Time.local(bill_year,UtilityBill.first.month,1).to_i) * 1000 %>,        
-        data: <%= UtilityBill.electric_usage %>
-      }]
-  });
-});
 // utility_prices
 $(function () {
   $('#utility_prices').highcharts({
       chart: {
-          type: 'line',
+          type: 'column',
           animation: Highcharts.svg,
-          height: 400,
-          width: 700
+          height: 280,
+          width: 305
       },
       xAxis: {
-          type: 'datetime'
       },      
       title: {
           text: 'Utility Prices'
       },
       series: [
       {
-        name: "Electricity Cost per KWh",
-        pointInterval: (2419200000),
-        <% bill_year = (UtilityBill.first.created_at).year %>
-        pointStart: <%= (Time.local(bill_year,UtilityBill.first.month,1).to_i) * 1000 %>,        
-        data: <%= UtilityBill.prices[0] %>
+        name: "Electricity Cost per 100 KWh",
+        data: <%= UtilityBill.prices[1] %>
       },
       {
         name: "Gas Price per DecaTherm",
-        pointInterval: (2419200000),
-        <% bill_year = (UtilityBill.first.created_at).year %>
-        pointStart: <%= (Time.local(bill_year,UtilityBill.first.month,1).to_i) * 1000 %>,        
-        data: <%= UtilityBill.prices[1] %>
+        data: <%= UtilityBill.prices[0] %>
       }]
+  });
+});
+
+
+$(function () {
+  $('#utility_cost').highcharts({
+      chart: {
+          type: 'column',
+          animation: Highcharts.svg,
+          height: 280,
+          width: 305
+      },
+      xAxis: {
+      },   
+      yAxis:{
+        title:null
+      },   
+      title: {
+          text: 'Electricity Usage',
+          style: {
+            color: "#E8FCB9"
+          }      
+      },
+      series: [
+      {
+        name: "Avg, Daily Electric Cost",
+        data: <%= UtilityBill.usage("electric") %>
+      },
+      {
+        name: "Avg. Daily Gas Cost",
+        data: <%= UtilityBill.usage("gas") %>
+      },
+      ]
   });
 });
 

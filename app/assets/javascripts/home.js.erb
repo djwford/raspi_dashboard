@@ -21,6 +21,28 @@ $(window).load(function() {
   // slideshow / carousel graphs  
 });
 
+// loads the initial data for the chart
+function requestData(chartName) {
+  var chartTarget = ("#" + chartName)
+  var chart = ($(chartTarget)).highcharts();  
+  $.ajax({    
+    url: ('/data/' + chartName + '.json'),
+    dataType: "json",
+    success: function(data) {
+      console.log(data);
+      chart.series[0].removePoint(0);
+      for(var i = 0; i < data.length; i++){
+        chart.series[0].addPoint(data[i], false, false);
+      }
+      // return data;
+    },
+    error:function(error){
+      console.log(error);
+    },
+    cache: false
+  });
+}
+
 $(document).ready(function(){
   // Create two variable with the names of the months and days in an array
   var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
@@ -53,6 +75,9 @@ $(document).ready(function(){
     // Add a leading zero to the hours value
     $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
       }, 1000); 
+
+  // load data into charts
+  // requestData("temperature_today");
 });
   
 
@@ -121,14 +146,17 @@ $(function () {
       },
       series: [{
         name: "Temperature",
-        pointInterval: 120000,
+        pointInterval: 240000,
         pointStart: <%= (Time.now.beginning_of_day.to_i) * 1000 %>,
-        data: <%= JSON::parse(TempRecord.last.readings) %>,
+        data: [0],
+        //data: <%= JSON::parse(TempRecord.last.readings) %>,
         lineWidth: 3,
         color: "#E8FCB9"
       }]
   });
 });
+
+
 
 function update_daily_temp(temp){
   var chart = $('#temperature_today').highcharts();

@@ -7,19 +7,32 @@
   </ul>
 </div>
 
+<div id="utility_links">
+  <%= render 'layouts/navigation_links' %>
+</div>
+
 <div id="forecast_container">
-  <%= render 'layouts/forecast' %>
+  <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=40.7671768&lon=-111.8709666&name=SLC&color=#00aaff&font=Georgia&units=us"> </iframe>
 </div>
 
 <div id="spotify_container">
-  <%= render 'layouts/spotify' %>
+  <iframe src="https://embed.spotify.com/?uri=spotify:user:dw.deviant:playlist:6weUS6Ng9eA67U0e9lMP7c" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+  <iframe src="https://embed.spotify.com/?uri=spotify:user:dw.deviant:playlist:7p92oJFv4EvWOAIq74TyGy" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+  <iframe src="https://embed.spotify.com/?uri=spotify:user:dw.deviant:playlist:7q3Cnx0qz7xkRkMmG8pw8O" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
 </div>
 
-<div id="temp_graphs">
-  <%= render 'layouts/temp_readings' %>
-  <%= render 'layouts/hourly_forecast' %>  
+<div id="calendar">
+<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=pluralsight.com_sio6620kcc3p3bm4pkcsai3964%40group.calendar.google.com&amp;color=%23691426&amp;ctz=America%2FDenver" style=" border-width:0 " width="400" height="400" frameborder="0" scrolling="no"></iframe>
 </div>
 
-<div id="utilities_graphs">
-  <%= render 'layouts/utility_bill_graph' %>
+<div id="temperature_today" class="graph_top"></div>
+
+  <div id="bottom_graphs_container">
+    <div id="temperature_month" class="graph_bottom"></div>
+    <div id="temperature_average" class="graph_bottom"></div>  
+    <div id="temp_display" class="graph_bottom"></div> 
+    <div id="hourly_forecast_temperature" class="graph_bottom"></div>
+    <div id="hourly_forecast_other" class="graph_bottom"></div>
+    <div id="utility_prices" class="graph_bottom"></div>
+    <div id="utility_cost" class="graph_bottom"></div>
 </div>

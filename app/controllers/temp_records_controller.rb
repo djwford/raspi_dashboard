@@ -8,7 +8,7 @@ class TempRecordsController < ApplicationController
         @tempRecord = TempRecord.new(temp_record_params)
         if TempRecord.any?
           # check if the record is for the day after the last record's record_date
-          if @tempRecord.record_date.to_date.day >= ((TempRecord.last.record_date.to_date + 1.day).day)
+          if @tempRecord.record_date.to_date >= (TempRecord.last.record_date.to_date + 1.day)
             # create a new record
             puts "record_date"
             puts @tempRecord.record_date

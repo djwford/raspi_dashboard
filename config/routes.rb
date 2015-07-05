@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
   post 'readings/new', to: "readings#new"
   resources :utility_bills
+  get 'data/temperature_today', to: "data#temperature_today"
 end
